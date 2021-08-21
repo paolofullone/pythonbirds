@@ -21,3 +21,19 @@ if __name__ == '__main__': # a main serve para fazermos os testes.
     print(luca.idade)
     for filho in luca.filhos:
         print(filho.nome)
+
+    luca.sobrenome='Fullone' # aqui estamos criando um atributo para um objeto em execução (dinamicamente), ou seja,
+    # sem declarar no 'def__init__', o python permite que seja feito desta forma, porém este atributo se aplica somente
+    # a este objeto 'luca', nenhum outro objeto desta classe será afetado. se pedirmos o paolo.sobrenome retornará um
+    # erro.
+    print(luca.sobrenome)
+    # podemos usar o __dict__ para acessar todos os atributos de cada objeto:
+    print(luca.__dict__) # aqui tem sobrenome
+    print(paolo.__dict__) # aqui não tem.
+    # Podemos remover os atributos dinamicamente também:
+    del luca.filhos
+    print()
+    print(luca.__dict__) # agora o objeto luca não tem mais o atributo filhos, ainda que o atributo filhos tenha sido
+    # criado no __init__.
+    # Isso NÃO costuma ser uma boa prática. Mas pode ser útil, por exemplo pegar uma data e apresentar como formato
+    # diferente somente em uma instância.
