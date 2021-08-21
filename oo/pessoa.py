@@ -1,4 +1,7 @@
 class Pessoa:
+    olhos = 2 # este é um atributo default, se criarmos o olhos=2 dentro do __init__ junto com os demais atributos, o
+    # python vai alocar um espaço em memória olhos=2 para cada pessoa criada no jogo, com o atributo default o python
+    # cria apenas 1 espaço em memória para este atributo.
     def __init__(self, *filhos, nome=None, idade=20): # o *filhos permite que seja passada uma quantidade variada de
         # filhos na construção de uma pessoa.
         self.nome = nome # aqui temos um parametro nome e um atributo nome, o atributo é o que está conectado com o
@@ -37,3 +40,11 @@ if __name__ == '__main__': # a main serve para fazermos os testes.
     # criado no __init__.
     # Isso NÃO costuma ser uma boa prática. Mas pode ser útil, por exemplo pegar uma data e apresentar como formato
     # diferente somente em uma instância.
+    print(f'Uma pessoa normal tem {Pessoa.olhos} olhos.') # Podemos acessar o atributo olhos diretamente da classe
+    # Pessoa, pois ele é um atributo default. Porém se perguntarmos Pessoa.nome ou Pessoa.filhos vai retornar um erro
+    # pois são atribudos de objetos da classe.
+    print(f'A pessoa {luca.nome} tem {luca.olhos} olhos.')
+    # observar que o __dict__ de Luca e Paolo não possuem o atributo de classe olhos. Caso seja alterado o número de
+    # olhos de luca (luca.olhos = 1) o __dict__ de luca passa a ter o atributo olhos, porém o de Paolo não será
+    # alterado. Caso desejemos alterar o atributo olhos para todas as pessoas devemos executar Pessoa.olhos = 3, assim o
+    # impacto será em todas as pessoas criadas.
