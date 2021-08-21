@@ -13,6 +13,14 @@ class Pessoa:
     def cumprimentar(self):  #poderia ser qq dois, em java o self é this, no python sempre colocamos self
         return f'Olá {id(self)}'
 
+    @staticmethod # este é um decorator do python, tudo que começa com @ é um decorator.
+    def metodo_estatico():
+        return 40
+
+    @classmethod
+    def nome_e_atributos_de_classe(cls): # o pycharm já preenche o cls automaticamente
+        return f'{cls} - olhos {cls.olhos}'
+
 if __name__ == '__main__': # a main serve para fazermos os testes.
     paolo = Pessoa(nome='Paolo')
     luca = Pessoa(paolo, nome='Luca') # criamos o objeto luca que tem um filho paolo, este é um objeto complexo.
@@ -48,3 +56,6 @@ if __name__ == '__main__': # a main serve para fazermos os testes.
     # olhos de luca (luca.olhos = 1) o __dict__ de luca passa a ter o atributo olhos, porém o de Paolo não será
     # alterado. Caso desejemos alterar o atributo olhos para todas as pessoas devemos executar Pessoa.olhos = 3, assim o
     # impacto será em todas as pessoas criadas.
+    print(Pessoa.metodo_estatico(), luca.metodo_estatico()) # com o decorator criado, da mesma forma podemos chamar o
+    # método estático da classe ou do objeto.
+    print(Pessoa.nome_e_atributos_de_classe(), luca.nome_e_atributos_de_classe()) # idem ao decorator static.
