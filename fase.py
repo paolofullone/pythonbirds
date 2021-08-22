@@ -36,6 +36,8 @@ class Fase():
         self._porcos = []
         self._obstaculos = []
 
+        # Quando começamos um atributo com _ estamos dizendo que é um atributo protegido, que não deveria ser acessado
+        # pelo usuário da biblioteca. Chamado de atributo protegido no Java por ex.
 
     def adicionar_obstaculo(self, *obstaculos):
         """
@@ -43,7 +45,7 @@ class Fase():
 
         :param obstaculos:
         """
-        pass
+        self._obstaculos.extend(obstaculos)
 
     def adicionar_porco(self, *porcos):
         """
@@ -51,7 +53,7 @@ class Fase():
 
         :param porcos:
         """
-        pass
+        self._porcos.extend((porcos))
 
     def adicionar_passaro(self, *passaros):
         """
@@ -59,7 +61,7 @@ class Fase():
 
         :param passaros:
         """
-        pass
+        self._passaros.extend((passaros))
 
     def status(self):
         """
