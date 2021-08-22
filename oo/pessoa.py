@@ -10,7 +10,7 @@ class Pessoa:
         self.idade = idade
         self.filhos = list(filhos)
 
-    def cumprimentar(self):  #poderia ser qq dois, em java o self é this, no python sempre colocamos self
+    def cumprimentar(self):  #poderia ser qq valor, nome, em java o self é this, no python sempre colocamos self.
         return f'Olá {id(self)}'
 
     @staticmethod # este é um decorator do python, tudo que começa com @ é um decorator.
@@ -20,6 +20,10 @@ class Pessoa:
     @classmethod
     def nome_e_atributos_de_classe(cls): # o pycharm já preenche o cls automaticamente
         return f'{cls} - olhos {cls.olhos}'
+
+class Homem(Pessoa): #Aqui estamos criando uma classe homem que herda da classe Pessoa todos os seus atriutos.
+    pass
+
 
 if __name__ == '__main__': # este if serve para fazermos os testes. os testes não serão impressos/exibidos quando o
     # arquivo pessoa.py for importado em outros módulos. Se executarmos o comando print(__name__) o resultado é __main__
@@ -67,3 +71,13 @@ if __name__ == '__main__': # este if serve para fazermos os testes. os testes n�
     print(Pessoa.metodo_estatico(), luca.metodo_estatico()) # com o decorator criado, da mesma forma podemos chamar o
     # método estático da classe ou do objeto.
     print(Pessoa.nome_e_atributos_de_classe(), luca.nome_e_atributos_de_classe()) # idem ao decorator static.
+
+    # Após criar a classe Homem que herda de Pessoa podemos perguntar:
+    pessoa = Pessoa('Anomimo')
+    print(isinstance(pessoa, Pessoa)) #estamos perguntando se o objeto pessoa é da classe Pessoa. A resposta é True.
+    print(isinstance(pessoa, Homem)) # aqui retorna falso.
+    # Agora criamos um Homem chamado Joe, se perguntarmos se é pessoa retorna true e se perguntamos se é homem retorna
+    # true também.
+    joe = Homem(nome='Joe')
+    print(isinstance(joe, Pessoa))
+    print(isinstance(joe, Homem))
