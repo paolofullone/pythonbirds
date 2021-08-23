@@ -57,7 +57,8 @@ class PassaroFake(AtorFake):
         return self._lancado
 
     def lancar(self, angulo, tempo):
-        if self._lancado:
+        if self._lancado: # o _lancado no init é falso, então quando executamos o lançar, se o lancado for falso não
+                          # executa o raise e o lancado passa a ser verdadeiro para este objeto em execução.
             raise DuploLancamentoExcecao()
         self._lancado = True
 
@@ -164,20 +165,25 @@ class FaseTestes(TestCase):
         self.assertEqual(VITORIA, fase.status(),
                          'Sem porco ativo, o jogo deveria acabar com vitória')
 
+
+    ' Quando acabavam os pássaros e o jogador tentava lançar um pássaro, retornava um erro que foi corrigido e criou um ' \
+    'teste para validar que quando o usuário tenta lançar um terceiro pássaro depois de lançar os 2 que tinha neste ' \
+    'exemplo não vai retornar um erro'
+
     def teste_lancar_passaro_sem_erro_quando_nao_existe_passaro(self):
-        passaros = [PassaroFake(1, 1) for _ in range(2)]
-        fase = Fase()
-        fase.adicionar_passaro(*passaros)
-        self.assertFalse(passaros[0].foi_lancado())
-        self.assertFalse(passaros[1].foi_lancado())
-        fase.lancar(90, 1)
-        fase.lancar(45, 3)
-        fase.lancar(31,
-                    5)  # testando que lançar passaros depios de todos
+        passaros = [PassaroFake(1, 1) for _ in range(2)] #adicionamos 2 pássaros
+        fase = Fase()                                    # criamos a fase
+        fase.adicionar_passaro(*passaros)                # adicionamos os 2 pássaros na fase
+        self.assertFalse(passaros[0].foi_lancado())      # certificamos que o primeiro pássaro não foi lançado
+        self.assertFalse(passaros[1].foi_lancado())      # certificamos que o segundo pássaro não foi lançado
+        fase.lancar(90, 1)                               # lançamos o primeiro pássaro
+        fase.lancar(45, 3)                               # lançamos o segundo
+        fase.lancar(31,                                  # tentamos lançar o terceiro. a fase não deve fazer nada.
+                    5)  # testando que lançar passaros depois de todos
         # lançados não causa erro
 
-        self.assertTrue(passaros[0].foi_lancado())
-        self.assertTrue(passaros[1].foi_lancado())
+        self.assertTrue(passaros[0].foi_lancado())       # certificamos que o passaro 1 foi lançado
+        self.assertTrue(passaros[1].foi_lancado())       # certificamos que o passaro 2 foi lançado
 
     def teste_intervalo_de_colisao_padrao(self):
         '''

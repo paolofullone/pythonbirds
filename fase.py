@@ -95,7 +95,10 @@ class Fase():
         :param angulo: ângulo de lançamento
         :param tempo: Tempo de lançamento
         """
-        pass
+        for passaro in self._passaros:           # para cada pássaro na lista de passaros
+            if not passaro.foi_lancado():        # verificar se o pássaro foi lançado, se ele não foi lançado
+                passaro.lancar(angulo, tempo)    # lançar o pássaro com o ângulo e o tempo em que foi lançado.
+                break                            # depois de encontrar o primeiro pássaro que vai ser lançado podemos parar o laço for.
 
 
     def calcular_pontos(self, tempo):
