@@ -16,6 +16,7 @@ from atores import Ator, DESTRUIDO, ATIVO, Obstaculo, Porco, PassaroAmarelo, Pas
 class AtorTestes(TestCase):
     def teste_valores_padrao(self):
         'Testa valores iniciais padrão de um Ator'
+        ' Um ator possui coordenadas x e y, possui um status ativo e tem um caracter A quando ativo.'
         ator = Ator()
         self.assertEqual(0, ator.x)
         self.assertEqual(0, ator.y)
@@ -33,12 +34,12 @@ class AtorTestes(TestCase):
     def teste_ator_posicao(self):
         'Teste que verifica que o ator comum não deve se mover independente do tempo do jogo'
         ator = Ator()
-        x, y = ator.calcular_posicao(0)
+        x, y = ator.calcular_posicao(0) #calcular a posição do ator no instante 0
         self.assertEqual(0, x)
         self.assertEqual(0, y)
 
-        ator = Ator(0.3, 0.5)
-        x, y = ator.calcular_posicao(10)
+        ator = Ator(0.3, 0.5)           # aqui iniciamos o ator em uma posição diferente de 0
+        x, y = ator.calcular_posicao(10) # independente do tempo que chamemos a função, um ator estático deve estar na mesma posição.
         self.assertEqual(0.3, x)
         self.assertEqual(0.5, y)
 

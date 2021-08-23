@@ -29,6 +29,8 @@ class Ator():
 
     def caracter(self):
         return self._caracter_ativo if self.status == ATIVO else self._caracter_destruido
+    "if else em uma linha pois é muito simples, o caracter retorna ativo se o status for ativo e destruido caso não " \
+    "seja ativo "
 
     def calcular_posicao(self, tempo):
         """
@@ -38,7 +40,7 @@ class Ator():
         :param tempo: o tempo do jogo
         :return: posição x, y do ator
         """
-        return 1, 1
+        return self.x, self.y
 
     def colidir(self, outro_ator, intervalo=1):
         """

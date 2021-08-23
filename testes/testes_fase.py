@@ -31,9 +31,9 @@ class AtorFake: #São chamados de Mock ao invés de Fake.
     def calcular_posicao(self, tempo):
         self.calcular_posicao_executado = True
 
-    def colidir(self, outro_ator, intervalo):
+    def colidir(self, outro_ator, intervalo): # aqui o self é um ator, e o outro_ator é outro que colide com ele.
         self.colidir_executado = outro_ator.colidir_executado = True
-        self.intervalo_colisao = outro_ator.intervalo_colisao = intervalo
+        self.intervalo_colisao = outro_ator.intervalo_colisao = intervalo # caso o colidir seja executado eu guardo o intervalo que foi definido como none no init nos dois atores.
 
     def caracter(self):
         return ' '
@@ -190,12 +190,12 @@ class FaseTestes(TestCase):
         Método que testa se o intervalo de colisão da Fase é repassado aos
         atores. Padrão de intervalo é 1
         '''
-        fase = Fase()
-        passaro = PassaroFake(1, 1)
-        fase.adicionar_passaro(passaro)
-        porco = PorcoFake(2, 2)
-        fase.adicionar_porco(porco)
-        fase.calcular_pontos(0)
+        fase = Fase()                                          # fase criada
+        passaro = PassaroFake(1, 1)                            # passaro na posicao 1, 1 criado
+        fase.adicionar_passaro(passaro)                        # passaro adicionado a fase
+        porco = PorcoFake(2, 2)                                # porco na posicao 2, 2 criado
+        fase.adicionar_porco(porco)                            # porco adicoinado a fase
+        fase.calcular_pontos(0)                                #
         self.assertTrue(passaro.colidir_executado)
         self.assertTrue(porco.colidir_executado)
         self.assertTrue(passaro.calcular_posicao_executado)
