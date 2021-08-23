@@ -106,7 +106,8 @@ class FaseTestes(TestCase):
 
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
-        porcos = [PorcoFake(1, 1) for _ in range(2)]  # criando 2 porcos
+        porcos = [PorcoFake(1, 1) for _ in range(2)]  # criando 2 porcos usando list comprehension. Quando a variável
+        # 'i' não é importante usamos _ em seu nome e  não utilizamos no início da list comprehension.
         passaros = [PassaroFake(1, 1) for _ in range(2)]  # criando 2 pássaros
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
