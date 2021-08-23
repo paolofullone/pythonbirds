@@ -11,7 +11,7 @@ class Pessoa:
         self.filhos = list(filhos)
 
     def cumprimentar(self):  #poderia ser qq valor, nome, em java o self é this, no python sempre colocamos self.
-        return f'Olá {id(self)}'
+        return f'Olá, meu nome é {self.nome}'
 
     @staticmethod # este é um decorator do python, tudo que começa com @ é um decorator.
     def metodo_estatico():
@@ -22,15 +22,22 @@ class Pessoa:
         return f'{cls} - olhos {cls.olhos}'
 
 class Homem(Pessoa): #Aqui estamos criando uma classe homem que herda da classe Pessoa todos os seus atriutos.
-    pass
+    def cumprimentar(self):
+        cumprimentar_da_classe = super().cumprimentar() #o super pega o método da classe pai.
+        return f'{cumprimentar_da_classe}. Aperto de mão.'
+
+class Mutante(Pessoa):
+    olhos = 3 # Na classe pessoa, todos tem 2 olhos, criamos a classe Mutante que herda essa característica da classe
+    # pessoa, porém é possível realizar a sobrescrita do dado de classe e todas as pessoas criadas a partir da classe
+    # mutante terão 3 olhos.
 
 
 if __name__ == '__main__': # este if serve para fazermos os testes. os testes não serão impressos/exibidos quando o
     # arquivo pessoa.py for importado em outros módulos. Se executarmos o comando print(__name__) o resultado é __main__
     # ao executar o print(__name__) em outro módulo ele vai ter o nome da classe e não mais vai se chamar __main__
 
-    paolo = Pessoa(nome='Paolo')
-    luca = Pessoa(paolo, nome='Luca') # criamos o objeto luca que tem um filho paolo, este é um objeto complexo.
+    paolo = Mutante(nome='Paolo')
+    luca = Homem(paolo, nome='Luca') # criamos o objeto luca que tem um filho paolo, este é um objeto complexo.
     print(Pessoa.cumprimentar(luca)) #agora vamos executar o método, Pessoa, pedimos o cumprimentar e passamos o pessoa.
     print(id(luca))
     print(luca.cumprimentar()) # Podemos executar o método a partir do objeto p e ter o mesmo resultado do
@@ -81,3 +88,10 @@ if __name__ == '__main__': # este if serve para fazermos os testes. os testes n�
     joe = Homem(nome='Joe')
     print(isinstance(joe, Pessoa))
     print(isinstance(joe, Homem))
+
+    # Imprimindo a quantidade de olhos do paolo
+    print(paolo.olhos)
+
+    # Alterando o cumprimento de uma classe herdada
+    print(paolo.cumprimentar())
+    print(luca.cumprimentar())
