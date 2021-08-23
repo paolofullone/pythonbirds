@@ -62,13 +62,14 @@ class AtorTestes(TestCase):
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 1))
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 2))
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(1, 3))
+        'Imaginar em uma planilha de excel um ator em um campo, as 8 linhas acima representam as 8 células em volta deste ator.'
 
     def teste_colisao_entre_atores_ativos_com_intervalo(self):
         # Com intervalo 2, diferente do padrão 1, essa colisão deveria acontecer
         self.assert_colisao_atores_ativos(Ator(2, 2), Ator(2, 4), 2)
 
     def teste_nao_colisao_entre_atores_distantes(self):
-        'Teste de que não há colisão entre atores distantes'
+        'Teste de que não há colisão entre atores distantes, sempre estão a 2 unidades de distância.'
         self.assert_nao_colisao(Ator(2, 2), Ator(2, 4))
         self.assert_nao_colisao(Ator(2, 2), Ator(3, 4))
         self.assert_nao_colisao(Ator(2, 2), Ator(4, 2))
@@ -114,7 +115,7 @@ class AtorTestes(TestCase):
     def assert_colisao_atores_ativos(self, ator, ator2, intervalo=1):
         """
         Se certifica que há colisão entre atores ativos
-        Atenção: Esse não é método de teste porque nao se inicia com prefixo "text".
+        Atenção: Esse não é método de teste porque nao se inicia com prefixo "test".
         Ele serve apenas para encapsular toda lógica de teste de colisão entre dois atores ativos
         """
         # Conferindo status dos dois atores antes da colisão
@@ -148,11 +149,11 @@ class ObstaculoTestes(TestCase):
     Esperado '0' como caracter de obstáculo ativo e ' ' como caracter de obstáculo destruído
     """
     def teste_status(self):
-        obstaculo = Obstaculo()
-        self.assertEqual('O', obstaculo.caracter())
-        outro_ator_na_mesma_posicao = Ator()
+        obstaculo = Obstaculo()                         # criamos um obstáculo
+        self.assertEqual('O', obstaculo.caracter())     # verificamos se seu caracter é um O
+        outro_ator_na_mesma_posicao = Ator()            # quando colidimos ele com outro ator na mesma posição
         obstaculo.colidir(outro_ator_na_mesma_posicao)
-        self.assertEqual(' ', obstaculo.caracter())
+        self.assertEqual(' ', obstaculo.caracter())     # o caracter deve ser trocado para ' ' que é seu caracter de destruído.
 
 
 class PorcoTestes(TestCase):
@@ -177,7 +178,7 @@ class PassaroBaseTests(TestCase):
 
     def assert_passaro_posicao(self, x_esperado, y_esperado, status_esperado, passaro, tempo):
         """
-        Método que se testa posição do pássaro.
+        Método auxiliar que se testa posição do pássaro.
         Atenção: Esse não é um método de teste porque não se inicia com prefixo "test".
         :param x_esperado: posição x esperada do passaro
         :param y_esperado: posição y esperada do passaro

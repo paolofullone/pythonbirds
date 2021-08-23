@@ -54,8 +54,11 @@ class Ator():
         :param intervalo: Intervalo a ser considerado
         :return:
         """
-        pass
-
+        if self.status == ATIVO and outro_ator.status == ATIVO: # Se os dois tem status ativo
+            delta_x = abs( self.x - outro_ator.x)               # retorna a posiçao sempre positiva
+            delta_y = abs(self.y - outro_ator.y)
+            if delta_x<= intervalo and delta_y <= intervalo:                         # caso a distância entre os atores seja menor que 1 no eixo x e y
+                self.status=outro_ator.status=DESTRUIDO
 
 
 class Obstaculo(Ator):
@@ -64,6 +67,7 @@ class Obstaculo(Ator):
 
 class Porco(Ator):
     _caracter_ativo = '@'
+    _caracter_destruido = '+'
 
 
 class DuploLancamentoExcecao(Exception):
@@ -95,7 +99,13 @@ class Passaro(Ator):
 
         :return: booleano
         """
+        """Esta expressão:
+        if self._tempo_de_lancamento is None:
+            return False
         return True
+        Pode ser substituída por:
+        """
+        return not self._tempo_de_lancamento is None # retorna o contrário da expressão, se o tempo de lançamento não é none, retorna true.
 
     def colidir_com_chao(self):
         """
@@ -131,7 +141,8 @@ class Passaro(Ator):
         :param tempo_de_lancamento:
         :return:
         """
-        pass
+        self._angulo_de_lancamento = angulo
+        self._tempo_de_lancamento = tempo_de_lancamento
 
 
 class PassaroAmarelo(Passaro):
@@ -140,3 +151,5 @@ class PassaroAmarelo(Passaro):
 
 class PassaroVermelho(Passaro):
     _caracter_ativo = 'V'
+    _caracter_destruido = 'v'
+    velocidade_escalar = 20
