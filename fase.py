@@ -129,15 +129,12 @@ class Fase():
 
     def _possui_porco_ativo(self):
         for porco in self._porcos: # para cada porco na lista de porcos
-            if porco.status = ATIVO;
-            return True
+            if porco.status == ATIVO:
+                return True
         return False
 
     def possui_passaros_ativos(self):
         for passaro in self._passaros: # para cada passaro na lista de passaros
-            if passaro.status = ATIVO;
-            return True
+            if passaro.status == ATIVO:
+                return True
         return False
-    
-        
-

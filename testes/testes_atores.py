@@ -264,7 +264,7 @@ class PassaroAmareloTests(PassaroBaseTests):
         Tests de lançamento vertical. Nele, o passaro só se move verticalmente e sua posição y se matém contanstante
         :return:
         """
-        passaro_amarelo = PassaroAmarelo(1, 1)
+        passaro_amarelo = PassaroAmarelo(1, 1) # criamos um passaro amarelo na posição 1, tempo 1
         passaro_amarelo.lancar(90, 2)  # passaro lancado a 90 graus no tempo 2 segundos
 
 
