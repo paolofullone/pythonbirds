@@ -75,7 +75,14 @@ class Fase():
 
         :return:
         """
-        return VITORIA
+        if not self._possui_porco_ativo(): # quando usamos o _ antes do nome somente a própria classe ou uma de suas
+            # subclasses pode fazer uso deste objeto. Trata-se de um objeto protegido. É interessante para que a
+            # interface com o usuário externo seja bem limpa.
+            return VITORIA
+        elif self.possui_passaros_ativos(): #se possui porco e passaros está em andamento.
+            return EM_ANDAMENTO
+        else:
+            return DERROTA # se não houver passaro ativo acabou em derrota.
 
     def lancar(self, angulo, tempo):
         """
@@ -106,4 +113,18 @@ class Fase():
 
     def _transformar_em_ponto(self, ator):
         return Ponto(ator.x, ator.y, ator.caracter())
+
+    def _possui_porco_ativo(self):
+        for porco in self._porcos: # para cada porco na lista de porcos
+            if porco.status = ATIVO;
+            return True
+        return False
+
+    def possui_passaros_ativos(self):
+        for passaro in self._passaros: # para cada passaro na lista de passaros
+            if passaro.status = ATIVO;
+            return True
+        return False
+    
+        
 

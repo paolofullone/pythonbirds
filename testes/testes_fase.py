@@ -106,28 +106,27 @@ class FaseTestes(TestCase):
 
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
-        porcos = [PorcoFake(1, 1) for _ in range(2)]  # criando 2 porcos usando list comprehension. Quando a variável
-        # 'i' não é importante usamos _ em seu nome e  não utilizamos no início da list comprehension.
+        porcos = [PorcoFake(1, 1) for _ in range(2)]  # criando 2 porcos usando list comprehension. Quando a variável 'i' não é importante usamos _ em seu nome e  não utilizamos no início da list comprehension.
         passaros = [PassaroFake(1, 1) for _ in range(2)]  # criando 2 pássaros
-        fase.adicionar_porco(*porcos)
+        fase.adicionar_porco(*porcos) # aqui estamos adicionando os porcos com status ativo
         fase.adicionar_passaro(*passaros)
 
-        self.assertEqual(EM_ANDAMENTO, fase.status())
+        self.assertEqual(EM_ANDAMENTO, fase.status()) # estamos certificando que o jogo está em andamento
 
-        for ator in porcos + passaros:
-            ator.status = DESTRUIDO
-        self.assertEqual(VITORIA, fase.status())
+        for ator in porcos + passaros: #iterando nas listas de porcos e passaros e verificando se o status é destruido
+            ator.status = DESTRUIDO #vamos passar o status de todos os atores para destruído.
+        self.assertEqual(VITORIA, fase.status()) # quando todos estão destruidos o status deve ser de vitória.
 
-        fase.adicionar_obstaculo(Obstaculo())
+        fase.adicionar_obstaculo(Obstaculo()) #quando temos todos com status destruio ainda podemos adicionar um obstáculo e continnuar com status vitória, pois o obstáculo não impede de terminar a fase com vitória.
         self.assertEqual(VITORIA, fase.status(),
                          'Obstáculo não interfere no fim do jogo')
 
-        fase.adicionar_porco(PorcoFake())
+        fase.adicionar_porco(PorcoFake()) # aqui estamos adicionando um porco ativo ao jogo e sem passáros, portanto derrota.
         self.assertEqual(DERROTA, fase.status(),
                          'Com Porco ativo e sem pássaro para lançar, o jogo '
                          'deveria acabar')
 
-        fase.adicionar_passaro(PassaroFake())
+        fase.adicionar_passaro(PassaroFake()) # aqui adicionamos um pássaro e o jogo deve estar em andamento, pois temos passsaro e porco ativos.
         self.assertEqual(EM_ANDAMENTO, fase.status(),
                          'Com Porco ativo e com pássaro para lançar, o jogo '
                          'não deveria acabar')
